@@ -31,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             })
             .exceptionHandling(h -> {
                 h.authenticationEntryPoint((req, res, e) -> { 
-                    res.sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
+                    res.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
                 });
             })
             .headers(h -> {
@@ -41,7 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 h.loginPage("/login")
                     .successHandler((req, res, e) -> {})
                     .failureHandler((req, res, e) -> {
-                        res.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+                        res.sendError(HttpServletResponse.SC_BAD_REQUEST, e.getMessage());
                     })
                     .usernameParameter("username")
                     .passwordParameter("password");

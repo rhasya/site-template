@@ -7,19 +7,27 @@ const useAuth = () => useContext(authContext);
 function AuthValue() {
   const [username, setUsername] = useState(localStorage.getItem('username'));
   
-  const signIn = (username, password, cb) => {
-    authUtils.signIn(username, password, () => {
-      setUsername(username);
-      localStorage.setItem('username', username);
-      if (cb) cb();
+  const signIn = (username, password) => {
+    return new Promise((resolve, reject) => {
+      authUtils.signIn(username, password).then(() => {
+        setUsername(username);
+        localStorage.setItem('username', username);
+        resolve();
+      }).catch(e => {
+        reject(e);
+      });
     });
   };
 
-  const signOut = (cb) => {
-    authUtils.signOut(() => {
-      setUsername(null);
-      localStorage.removeItem('username');
-      if (cb) cb();
+  const signOut = () => {
+    return new Promise((resolve, reject) => {
+      authUtils.signOut().then(() => {
+        setUsername(null);
+        localStorage.removeItem('username');
+        resolve();
+      }).catch(e => {
+        reject(e);
+      })
     });
   }
 

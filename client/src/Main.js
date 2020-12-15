@@ -10,9 +10,9 @@ function Main() {
   const auth = useAuth();
 
   const signOut = () => {
-    auth.signOut(() => {
+    auth.signOut().then(() => {
       hist.push('/');
-    })
+    });
   };
 
   return (

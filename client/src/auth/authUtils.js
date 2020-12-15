@@ -1,28 +1,32 @@
-function signIn(username, password, cb) {
-  fetch('/login', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    'body': `username=${username}&password=${password}`
-  }).then(res => {
-    if (res.ok) {
-      cb();
-    }
-    else {
-      console.error(res.status, res.statusText);
-    }
+function signIn(username, password) {
+  return new Promise((resolve, reject) => {
+    fetch('/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      'body': `username=${username}&password=${password}`
+    }).then(res => {
+      if (res.ok) {
+        resolve();
+      }
+      else {
+        reject('Cannot sign in.');
+      }
+    });
   });
 }
 
-function signOut(cb) {
-  fetch('/logout').then(res => {
-    if (res.ok) {
-      cb();
-    }
-    else {
-      console.error(res.status, res.statusText);
-    }
+function signOut() {
+  return new Promise((resolve, reject) => {
+    fetch('/logout').then(res => {
+      if (res.ok) {
+        resolve();
+      }
+      else {
+        reject('Login fail.')
+      }
+    })
   });
 }
 
