@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 import {AuthProvider} from './auth/auth';
+import PrivateRoute from './auth/PrivateRoute';
 import Main from './Main';
 import Login from './auth/Login';
 import './App.css';
@@ -13,9 +14,9 @@ function App() {
           <Route exact path="/">
             <Login/>
           </Route>
-          <Route path="/main">
+          <PrivateRoute path="/main">
             <Main/>
-          </Route>
+          </PrivateRoute>
         </Switch>
       </Router>
     </AuthProvider>

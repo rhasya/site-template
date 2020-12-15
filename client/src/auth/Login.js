@@ -42,7 +42,7 @@ function Login() {
           <Typography color="error" variant="caption">{errMsg}</Typography>
         </div>
       </CardContent>
-      <CardActions>
+      <CardActions style={{justifyContent: 'flex-end'}}>
         <Button variant="contained" color="primary" onClick={signIn}>sign in</Button>
       </CardActions>
     </Card>
